@@ -1,0 +1,4 @@
+bind-addr: 192.168.0.109:8082
+auth: password
+password: 2b87f5ba81a2a4899559e87e
+cert: false

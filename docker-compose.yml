@@ -1,0 +1,46 @@
+version: "3.9"
+
+networks:
+  nginx-proxy:
+      name: nginx-proxy
+
+services:
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 5173:5173
+      - 3000:3000	
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./nginx/extraart.conf:/etc/nginx/conf.d/extraart.conf
+      - ./nginx/proxy.conf:/etc/nginx/conf.d/proxy.conf
+      - ./nginx/front.conf:/etc/nginx/conf.d./front.conf
+      - ./nginx/back.conf:/etc/nginx/conf.d/back.conf
+    links:
+      - frontend-react
+      - backend-nest
+    
+
+  frontend-react:
+    container_name: form-front
+    image: form-front
+    ports:
+      - 5173
+      - 5174
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./www/FormJSON-Front:/usr/share/nginx/html
+  
+  backend-nest:
+    container_name: form-back
+    image: formjson-back
+    ports:
+      - 3000:3000
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./www/FormJSON-Back:/usr/share/nginx/html
