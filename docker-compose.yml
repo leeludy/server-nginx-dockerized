@@ -2,22 +2,23 @@ version: "3.9"
 
 networks:
   nginx-proxy:
-    name: nginx-proxy
+      name: nginx-proxy
 
 services:
   nginx-proxy:
     container_name: nginx-proxy
     image: nginx:latest
     ports:
-      - 80:80
+      - 81:81
     networks:
       - nginx-proxy
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/html:/user/share/nginx/html
     links:
       - frontend-react
       - backend-nest
-
+  
   backend-nest:
     container_name: form-back
     image: formjson-back
