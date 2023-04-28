@@ -2,7 +2,7 @@ version: "3.9"
 
 networks:
   nginx-proxy:
-      name: nginx-proxy
+    name: nginx-proxy
 
 services:
   nginx-proxy:
@@ -18,7 +18,7 @@ services:
     links:
       - frontend-react
       - backend-nest
-  
+
   backend-nest:
     container_name: form-back
     image: formjson-back

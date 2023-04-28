@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  api:
+    image: formjson-back
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      PORT: ${APP_PORT_INT}
+    ports:
+      - 81:3000
+    command: npm run start
+    env_file:
+      - .env

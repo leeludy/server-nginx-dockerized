@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  frontTest:
+    image: formjson-front
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 81:5173
+    env_file:
+      - .env
